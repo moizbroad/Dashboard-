@@ -2,13 +2,13 @@ import React from 'react'
 import { useState } from 'react';
 import InputField from './CustomComponent/InputField';
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router';
+// import { Navigate, useNavigate } from 'react-router';
 
 
 
 const signup = () => {
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [signup, setSignup] = useState({
     email: '',
     first_name: '',
@@ -16,17 +16,24 @@ const signup = () => {
     company_name: '',
     password: '',
   });
-  console.log(signup, "ali")
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setSignup({ ...signup, [name]: value });
-  };
+  // console.log(signup, "ali")
+  // const handleChange = (e) => {
+    
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let data = {
+      first_name: signup.first_name,
+      last_name: signup.last_name,
+      company_name: signup.company_name,
+      email: signup.email,
+      password: signup.password,
+    };
+
     try {
-      const res = await axios.post('https://test-backend.budgetlab.io/accounts/create/', signup);
+      const res = await axios.post('https://test-backend.budgetlab.io/accounts/create/', data);
       // console.log( res, "data")
       // Handle the response, e.g., show a success message or redirect
       console.log('Account created successfully', res.data);
@@ -38,7 +45,7 @@ const signup = () => {
 
     }
     alert("Sucessfully created account")
-    navigate('/login')
+    // navigate('/login')
   };
 
 
@@ -126,7 +133,7 @@ const signup = () => {
             </div>
 
             <div className="mt-6">
-              <form action="#" className="space-y-6" onSubmit={handleChange}>
+              <form action="#" className="space-y-6" onSubmit={handleSubmit}>
                 <div>
 
                   <div className="mt-1">
@@ -138,8 +145,12 @@ const signup = () => {
                       type="email"
                       autoComplete="email"
                       required
-                      // value={signup.email}
-                      onChange={handleChange}
+                      value={signup.email}
+                      onChange={(value) => {
+                        setSignup((prev) => ({
+                          ...prev, email: value.target.value
+                        }))
+                      }}
                     />
                   </div>
                 </div>
@@ -158,8 +169,12 @@ const signup = () => {
                       type="text"
                       autoComplete="company_name"
                       required
-                      // value={signup.company_name}
-                      onChange={handleChange}
+                      value={signup.company_name}
+                      onChange={(value) => {
+                        setSignup((prev) => ({
+                          ...prev, company_name: value.target.value
+                        }))
+                      }}
 
                     />
                   </div>
@@ -175,8 +190,12 @@ const signup = () => {
                       type="text"
                       autoComplete="first_name"
                       required
-                      // value={signup.first_name}
-                      onChange={handleChange}
+                      value={signup.first_name}
+                      onChange={(value) => {
+                        setSignup((prev) => ({
+                          ...prev, first_name: value.target.value
+                        }))
+                      }}
                     />
                   </div>
                 </div>
@@ -190,8 +209,12 @@ const signup = () => {
                       type="text"
                       autoComplete="last_name"
                       required
-                      // value={signup.last_name}
-                      onChange={handleChange}
+                      value={signup.last_name}
+                      onChange={(value) => {
+                        setSignup((prev) => ({
+                          ...prev, last_name: value.target.value
+                        }))
+                      }}
 
                     />
                   </div>
@@ -208,8 +231,12 @@ const signup = () => {
                       type="password"
                       autoComplete="current-password"
                       required
-                      // value={signup.password}
-                      onChange={handleChange}
+                      value={signup.password}
+                      onChange={(value) => {
+                        setSignup((prev) => ({
+                          ...prev, password: value.target.value
+                        }))
+                      }}
 
                     />
                   </div>

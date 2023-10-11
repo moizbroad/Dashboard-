@@ -1,8 +1,43 @@
 import React from 'react'
 import InputField from './CustomComponent/InputField'
+import { useState } from 'react'
+import axios from 'axios'
+import gettokenaccess from '../../Helper/gettokenaccess'
+import { useNavigate } from 'react-router'
+
 
 
 const loogin = () => {
+  const navigate =useNavigate();
+
+  // login data 
+  const [logindata, setLoginData] = useState({
+    email: '',
+    password: '',
+    remember_me: false,
+  });
+
+
+  const gettoken = async () => {
+    let data = {
+      email: logindata.email,
+      password: logindata.password,
+      remember_me: logindata.remember_me
+   }
+    // console.log(data, "kkkk")
+    axios.post("https://test-backend.budgetlab.io/accounts/login/", data).then((res) => {
+      console.log(res, 'ooo');
+      if(res.status === 200) {
+        localStorage.setItem('access', res.data.access);
+      }
+      if(gettokenaccess()){
+        navigate('/')
+        // Route to Dashboard
+      }
+    }).catch((err) => {
+      console.log(err, 'eee');
+    })
+  }
   return (
 
     <>
@@ -19,56 +54,84 @@ const loogin = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
-            <div>
-              
-              <div className="mt-2">
-                <InputField
-                 label="Email Address"
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                 
-                />
-              </div>
+          {/* <form className="space-y-6"> */}
+          <div className="space-y-6">
+
+            <div className="mt-2">
+              <InputField
+                label="Email Address"
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                value={logindata.email}
+                onChange={(value) => {
+                  setLoginData((prev) => ({
+                    ...prev, email: value.target.value
+                  }))
+                }}
+
+              />
             </div>
+          </div>
 
-            <div>
-              
-              <div className="mt-2">
-                <InputField
-                 label="Password"
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required                 
-                />
-              </div>
+          <div>
+
+            <div className="mt-2">
+              <InputField
+                label="Password"
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                value={logindata.password}
+                onChange={(value) => {
+                  setLoginData((prev) => ({
+                    ...prev, password: value.target.value
+                  }))
+                }}
+              />
             </div>
+          </div>
 
-            <div className="flex items-center justify-end">
-                
-                <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
-              </div>
+          <div className="flex items-center">
+            <input
+              id="remember-me"
+              name="remember-me"
+              type="checkbox"
+              onChange={(value) => {
+                setLoginData((prev) => ({
+                  ...prev, remember_me: value.target.value
+                }))
+              }}
+              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            />
+            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+              Remember me
+            </label>
+          </div>
 
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign in
-              </button>
+          <div className="flex items-center justify-end">
+
+            <div className="text-sm">
+              <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                Forgot password?
+              </a>
             </div>
-          </form>
+          </div>
 
-         
+          <div>
+            <button
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={gettoken}>
+              Sign in
+            </button>
+          </div>
+          {/* </form> */}
+
+
         </div>
       </div>
     </>
