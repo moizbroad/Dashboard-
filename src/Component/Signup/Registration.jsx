@@ -62,7 +62,7 @@ const signup = () => {
         <div className="mx-auto w-full max-w-sm lg:w-96 " >
           <div>
             <img
-              className="h-12 w-auto"
+              className="h-8 w-auto"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt="Your Company"
             />

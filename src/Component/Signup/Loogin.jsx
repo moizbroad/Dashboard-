@@ -26,7 +26,6 @@ const loogin = () => {
    }
     // console.log(data, "kkkk")
     axios.post("https://test-backend.budgetlab.io/accounts/login/", data).then((res) => {
-      console.log(res, 'ooo');
       if(res.status === 200) {
         localStorage.setItem('access', res.data.access);
       }
