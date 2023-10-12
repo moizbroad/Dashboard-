@@ -4,11 +4,13 @@ import { useState } from 'react'
 import axios from 'axios'
 import gettokenaccess from '../../Helper/gettokenaccess'
 import { useNavigate } from 'react-router'
+import toast  from 'react-hot-toast';
+
 
 
 
 const loogin = () => {
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   // login data 
   const [logindata, setLoginData] = useState({
@@ -23,20 +25,29 @@ const loogin = () => {
       email: logindata.email,
       password: logindata.password,
       remember_me: logindata.remember_me
-   }
+    }
     // console.log(data, "kkkk")
     axios.post("https://test-backend.budgetlab.io/accounts/login/", data).then((res) => {
-      if(res.status === 200) {
+      if (res.status === 200) {
         localStorage.setItem('access', res.data.access);
       }
-      if(gettokenaccess()){
+      if (gettokenaccess()) {
         navigate('/')
         // Route to Dashboard
       }
-    }).catch((err) => {
-      console.log(err, 'eee');
     })
+    
+    .catch((err) => {
+      if (err.response.status === 401) {
+        toast.error('Authentication failed'); //
+      } else {
+        console.log(err, 'Unexpected error');
+      }
+    });
   }
+
+
+
   return (
 
     <>
@@ -115,13 +126,25 @@ const loogin = () => {
           <div className="flex items-center justify-end">
 
             <div className="text-sm">
-              <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+              <a  className="font-semibold text-indigo-600 hover:text-indigo-500" onClick={()=>navigate("/forgotpassword")}>
                 Forgot password?
               </a>
             </div>
           </div>
 
-          <div>
+          <div className="flex items-center w-full ">
+
+            <div className="text-base">
+
+               <p className=' text-black pt-2'> don't have account then
+                <a className='font-semibold text-indigo-600 hover:text-indigo-500' onClick={()=>navigate("/signup")} > signup   </a>
+
+                 </p>
+               
+            </div>
+          </div>
+
+          <div className='mt-4'>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={gettoken}>

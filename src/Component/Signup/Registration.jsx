@@ -2,13 +2,14 @@ import React from 'react'
 import { useState } from 'react';
 import InputField from './CustomComponent/InputField';
 import axios from 'axios';
-// import { Navigate, useNavigate } from 'react-router';
+ import { Navigate, useNavigate } from 'react-router';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
 const signup = () => {
 
-  // const navigate = useNavigate()
+   const navigate = useNavigate()
   const [signup, setSignup] = useState({
     email: '',
     first_name: '',
@@ -23,6 +24,11 @@ const signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!signup.email || !signup.first_name || !signup.last_name || !signup.company_name || !signup.password) {
+      toast.error('Please fill in all required fields.');
+      return;
+    }
 
     let data = {
       first_name: signup.first_name,
@@ -44,8 +50,8 @@ const signup = () => {
       console.error('Error creating account', error);
 
     }
-    alert("Sucessfully created account")
-    // navigate('/login')
+    toast.success('Account Successfully created!');
+    navigate('/login')
   };
 
 
