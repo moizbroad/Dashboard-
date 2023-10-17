@@ -22,6 +22,13 @@ const signup = () => {
     
   // };
 
+  const handelEnter = (e) => {
+    if ( e.target === 'Enter')
+    {
+      handleSubmit(e)
+    };
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -145,12 +152,12 @@ const signup = () => {
                   <div className="mt-1">
 
                     <InputField
-                      label="email"
-                      id="Email"
+                      label="Email"
+                      id="email"
                       name="email"
                       type="email"
                       autoComplete="email"
-                      required
+                      required  
                       value={signup.email}
                       onChange={(value) => {
                         setSignup((prev) => ({
@@ -173,7 +180,7 @@ const signup = () => {
                       id="company_name"
                       name="company_name"
                       type="text"
-                      autoComplete="company_name"
+                      autoComplete="on"
                       required
                       value={signup.company_name}
                       onChange={(value) => {
@@ -190,7 +197,7 @@ const signup = () => {
 
                   <div className="mt-1">
                     <InputField
-                      label="first_name"
+                      label="First name"
                       id="first_name"
                       name="first_name"
                       type="text"
@@ -209,11 +216,11 @@ const signup = () => {
                 <div>
                   <div className="mt-1">
                     <InputField
-                      label="last_name"
+                      label="Last name"
                       id="last_name"
                       name="last_name"
                       type="text"
-                      autoComplete="last_name"
+                      autoComplete="on"
                       required
                       value={signup.last_name}
                       onChange={(value) => {
@@ -237,6 +244,7 @@ const signup = () => {
                       type="password"
                       autoComplete="current-password"
                       required
+                      onKeyDown={handelEnter}
                       value={signup.password}
                       onChange={(value) => {
                         setSignup((prev) => ({

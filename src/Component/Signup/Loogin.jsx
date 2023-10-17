@@ -1,5 +1,6 @@
 import React from 'react'
 import InputField from './CustomComponent/InputField'
+import Button from './CustomComponent/Button';
 import { useState } from 'react'
 import axios from 'axios'
 import gettokenaccess from '../../Helper/gettokenaccess'
@@ -19,6 +20,13 @@ const loogin = () => {
     remember_me: false,
   });
 
+  const handelEnter = (e) => {
+    if ( e.key === 'Enter')
+    {
+      gettoken(e)
+    };
+  }
+
 
   const gettoken = async () => {
     let data = {
@@ -30,6 +38,7 @@ const loogin = () => {
     axios.post("https://test-backend.budgetlab.io/accounts/login/", data).then((res) => {
       if (res.status === 200) {
         localStorage.setItem('access', res.data.access);
+        
       }
       if (gettokenaccess()) {
         navigate('/')
@@ -38,12 +47,16 @@ const loogin = () => {
     })
     
     .catch((err) => {
-      if (err.response.status === 401) {
-        toast.error('Authentication failed'); //
-      } else {
-        console.log(err, 'Unexpected error');
-      }
+      console.log(err, "error");
+      toast.error(err.response.data.detail)
     });
+
+    
+
+
+
+
+
   }
 
 
@@ -106,11 +119,12 @@ const loogin = () => {
             </div>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center mt-4">
             <input
               id="remember-me"
               name="remember-me"
               type="checkbox"
+              onKeyDown={handelEnter}
               onChange={(value) => {
                 setLoginData((prev) => ({
                   ...prev, remember_me: value.target.value
@@ -118,7 +132,7 @@ const loogin = () => {
               }}
               className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
             />
-            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 ">
               Remember me
             </label>
           </div>
@@ -126,8 +140,8 @@ const loogin = () => {
           <div className="flex items-center justify-end">
 
             <div className="text-sm">
-              <a  className="font-semibold text-indigo-600 hover:text-indigo-500" onClick={()=>navigate("/forgotpassword")}>
-                Forgot password?
+              <a  className="font-semibold text-indigo-600 hover:text-indigo-500 cursor-pointer" onClick={()=>navigate("/forgotpassword")}>
+                Forget password ?
               </a>
             </div>
           </div>
@@ -137,19 +151,21 @@ const loogin = () => {
             <div className="text-base">
 
                <p className=' text-black pt-2'> don't have account then
-                <a className='font-semibold text-indigo-600 hover:text-indigo-500' onClick={()=>navigate("/signup")} > signup   </a>
+                <a className='font-semibold text-indigo-600 hover:text-indigo-500 cursor-pointer' onClick={()=>navigate("/signup")} > signup   </a>
 
                  </p>
                
             </div>
           </div>
 
-          <div className='mt-4'>
-            <button
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={gettoken}>
-              Sign in
-            </button>
+          <div    >
+            <Button
+              className="mt-8"
+              onClick={gettoken}
+              
+              >
+             Sign in 
+            </Button>
           </div>
           {/* </form> */}
 

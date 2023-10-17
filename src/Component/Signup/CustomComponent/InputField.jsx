@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+ import React, { Fragment } from 'react'
 
 
 const InputField = (props) => {
@@ -60,7 +60,7 @@ const InputField = (props) => {
         defaultValue={defaultValue}
         onChange={onChange}
         autoComplete={autoComplete}
-        required={required} 
+        required={required ? true : false} 
         type={type} />
          </div>
            )}
