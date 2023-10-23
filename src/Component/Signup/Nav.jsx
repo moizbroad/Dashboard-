@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -21,9 +21,12 @@ const Nav= () => {
   const navigate =useNavigate();
 
   const removtoken =()=>{
+    // debugger
     localStorage.clear()
-    navigate('/login')
-  }
+    navigate("/login")
+  } 
+
+ 
   
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -85,6 +88,7 @@ const Nav= () => {
               <button className="rounded-lg bg-gray-900 p-1 px-4 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" onClick={removtoken}>
                     Logout
               </button>
+             
 
               {/* Profile dropdown */}
               <Menu as="div" className="relative ml-3">
@@ -145,6 +149,10 @@ const Nav= () => {
           </div>
         </div>
 
+        <div className='text-center'> <button onClick={()=>navigate("/lastpage")}> call me </button>
+
+        </div>
+
         <Disclosure.Panel className="sm:hidden">
           <div className="space-y-1 px-2 pt-2 pb-3">
             {navigation.map((item) => (
@@ -161,6 +169,8 @@ const Nav= () => {
                 {item.name}
               </Disclosure.Button>
             ))}
+
+            
           </div>
         </Disclosure.Panel>
       </>

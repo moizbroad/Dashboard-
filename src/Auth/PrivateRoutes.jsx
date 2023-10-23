@@ -1,27 +1,92 @@
-import React from 'react'
-import { Outlet, Navigate } from 'react-router'
-import gettokenaccess from '../Helper/gettokenaccess'
+import React, { useEffect } from 'react';
+import { Outlet, Navigate, useNavigate } from 'react-router';
+import gettokenaccess from '../Helper/gettokenaccess';
+import getrefreshtoken from '../Helper/RefreshToken';
 
 const PrivateRoutes = () => {
-    // const [login , setLogin]= useState()
-    // const [sigup , setSignp]= useState()
-//     https://test-backend.budgetlab.io/accounts/password_reset/
-//     payload :
-//     {email: "faheem.bukhari1122@gmail.com"}
-// email
-// : 
-// "faheem.bukhari1122@gmail.com"
-// {"message":"success"}
+  const navigate = useNavigate();
+
+  // const [token, setToken]=useState({
+  //   refresh:""
+  // })
+  const RefreshToken = async () => {
+    let data = {
+      token: getrefreshtoken()
+    }
+    // console.log(data, "kkkk")
+    axios.post("https://test-backend.budgetlab.io/accounts/token/refresh/", data).then((res) => {
+      if (res.status === 200) {
+
+        localStorage.setItem('access', res.data.access);
+
+        // console.log(access, "aaa")
+
+      }
+
+    })
+
+      .catch((err) => {
+        console.log(err, "error");
+        // toast.error(err.response.data.detail)
+      });
+  }
+
+  const parseJwt = (token) => {
+    
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch (e) {
+      return null;
+    }
+  };
+  // 
+
+  const validateToken = (token) => {
+    
+    const decodeToken = parseJwt(token);
+    if (decodeToken) {
+      let date = new Date(decodeToken.exp * 1000);
+      if (date < new Date()) {
+        let rememberME = localStorage.getItem('rememberMe')
+        if (rememberME === true) {
+          RefreshToken()
+          // navigate('/')
+        } else {
+          localStorage.removeItem('access'); // Changed 'setItem' to 'removeItem' to clear the access token
+          navigate('/login')
+          // Route to Login
+
+        }
+      }
+
+    }
+    else {
+      return false;
+    }
+  };
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem('access');
+  //   const isValidToken = validateToken(token);
+
+  //   if (isValidToken) {
+  //     console.log('Token is valid');
+  //   } else {
+  //     console.log('Token is invalid or has expired');
+      
+  //   }
+   
+  // }, []);
+  // navigate('/login')
   
-    const auth = {
-        gettokenaccess: gettokenaccess() // Call the function to get the value
-    };
 
-    return (
-        auth.gettokenaccess ? <Outlet/> : <Navigate to="/login"  />
+  const auth = {
+    gettokenaccess: gettokenaccess(), // Call the function to get the value
+  };
 
-        
-    );
-}
+  return auth.gettokenaccess ? <Outlet /> : <Navigate to="/login" />  ;
+
+
+};
 
 export default PrivateRoutes;

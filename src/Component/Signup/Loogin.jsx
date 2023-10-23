@@ -5,14 +5,15 @@ import { useState } from 'react'
 import axios from 'axios'
 import gettokenaccess from '../../Helper/gettokenaccess'
 import { useNavigate } from 'react-router'
-import toast  from 'react-hot-toast';
-
-
+import toast  from 'react-hot-toast'; 
 
 
 const loogin = () => {
   const navigate = useNavigate();
 
+  // const [token, setToken]=useState({
+  //   refresh:""
+  // })
   // login data 
   const [logindata, setLoginData] = useState({
     email: '',
@@ -37,7 +38,12 @@ const loogin = () => {
     // console.log(data, "kkkk")
     axios.post("https://test-backend.budgetlab.io/accounts/login/", data).then((res) => {
       if (res.status === 200) {
-        localStorage.setItem('access', res.data.access);
+        localStorage.setItem('access', res.data.access);  
+        localStorage.setItem('Refreshtoken', res.data.refresh); 
+        // Storing the rememberMe flag in localStorage
+         localStorage.setItem('rememberMe', res.data.remember_me); 
+        
+        // console.log(access, "aaa"
         
       }
       if (gettokenaccess()) {
@@ -51,13 +57,16 @@ const loogin = () => {
       toast.error(err.response.data.detail)
     });
 
-    
-
-
-
-
+  
 
   }
+
+
+ 
+
+
+
+  
 
 
 

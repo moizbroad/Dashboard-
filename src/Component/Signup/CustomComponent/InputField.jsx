@@ -1,8 +1,9 @@
- import React, { Fragment } from 'react'
-
+import React, { useState } from 'react';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 const InputField = (props) => {
-  const { id,
+  const {
+    id,
     label,
     type,
     name,
@@ -30,38 +31,55 @@ const InputField = (props) => {
     noBoxShadow,
   } = props;
 
+  const [hidePassword, setHidePassword] = useState(true);
+
+  const togglePasswordVisibility = () => {
+    setHidePassword(!hidePassword);
+  };
 
   return (
-
-    
-    <div className={`${marginTop && "mt-4"} ${marginBottom && "mb-4"}`}>
+    <div className={`${marginTop && 'mt-4'} ${marginBottom && 'mb-4'}`}>
       {label && (
         <label htmlFor={id} className="block text-sm font-medium text-gray-700">
           {label}
-        </label>)}
+        </label>
+      )}
 
+      <div className='relative'>
+        <input
+          className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          id={id}
+          label={label}
+          max={max}
+          minLength={minLength}
+          maxLength={maxLength}
+          placeholder={placeholder}
+          pattern={pattern}
+          title={title}
+          value={value}
+          onBlur={onBlur}
+          onKeyDown={onKeyDown}
+          onKeyUp={onKeyUp}
+          autoFocus={autoFocus}
+          disabled={disabled}
+          defaultValue={defaultValue}
+          onChange={onChange}
+          autoComplete={autoComplete}
+          required={required ? true : false}
+          type={type === 'password' ? (hidePassword ? 'password' : 'text') : type}
+        />
+         {type === 'password' && (
+          <span
+            onClick={togglePasswordVisibility}
+            className="flex  cursor-pointer absolute right-4 top-3"
+          >
+            {hidePassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+          </span>
+        )}
+        
+      </div>
+    </div>
+  );
+};
 
-       
-        <input className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm "
-        id={id}
-        label={label}
-        max={max}
-        minLength={minLength}
-        maxLength={maxLength}
-        placeholder={placeholder}
-        pattern={pattern}
-        title={title}
-        value={value}
-        onBlur={onBlur}
-        onKeyDown={onKeyDown}
-        onKeyUp={onKeyUp}
-        autoFocus={autoFocus}
-        disabled={disabled}
-        defaultValue={defaultValue}
-        onChange={onChange}
-        autoComplete={autoComplete}
-        required={required ? true : false} 
-        type={type} />
-         </div>
-           )}
-         export default InputField
+export default InputField;
