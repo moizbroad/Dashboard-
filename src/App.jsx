@@ -37,22 +37,20 @@ function App() {
         <Route element={<PrivateRoutes />} >
           <Route path="/" element={<Main />} exact />
          < Route path="/main" element={< MainTeamPage />} exact /> 
-         
+         {/* {key && <Route path="/login" element={<Navigate to="/" />} />}
+          {key && <Route path="/signup" element={<Navigate to="/" />} />}
+          {!key && <Route  element={<Navigate to="/login" />} />} */}
           
-          {/* {key && <Route path="/login" element={<Navigate to="/" />} />}         */}
+                 
           <Route path="*" element={< DisplayError />} exact />
 
 
-         {/* {key && <Route path="/login" element={<Navigate to="/" />} />}
-          {key && <Route path="/signup" element={<Navigate to="/" />} />}
-          {!key && <Route  element={<Navigate to="/login" />} />}  */}
+        
 
 
         </Route>
 
-          {/* {key && <Route path="/login" element={<Navigate to="/" />} />}
-          {key && <Route path="/signup" element={<Navigate to="/" />} />}
-          {!key && <Route  element={<Navigate to="/login" />} />} */}
+        
           
         <Route path="/login" element={<LogIn />} exact />
         <Route path="/signup" element={<SignUp />} exact />

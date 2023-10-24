@@ -50,15 +50,27 @@ const signup = () => {
       // console.log( res, "data")
       // Handle the response, e.g., show a success message or redirect
       console.log('Account created successfully', res.data);
+      if(res.status==200)
+      {
+        
+        navigate('/login')
+        toast.success('Account Successfully created!');
+      }
 
 
-    } catch (error) {
+    } 
+    catch (error) {
       // Handle errors, e.g., show an error message
-      console.error('Error creating account', error);
+      console.error('Error', error);
+      toast.error(error.response.data.message)
 
     }
-    toast.success('Account Successfully created!');
-    navigate('/login')
+
+    // .catch((err) => {
+    //   console.log(err, "error");
+    //   toast.error(err.response.data.detail)
+    // })
+   
   };
 
 

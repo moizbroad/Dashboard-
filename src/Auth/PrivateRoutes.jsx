@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Outlet, Navigate, useNavigate } from 'react-router';
 import gettokenaccess from '../Helper/gettokenaccess';
 import getrefreshtoken from '../Helper/RefreshToken';
+import axios from 'axios';
+
 
 const PrivateRoutes = () => {
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ const PrivateRoutes = () => {
   // })
   const RefreshToken = async () => {
     let data = {
-      token: getrefreshtoken()
+      refresh: getrefreshtoken()
     }
     // console.log(data, "kkkk")
     axios.post("https://test-backend.budgetlab.io/accounts/token/refresh/", data).then((res) => {
@@ -32,6 +34,7 @@ const PrivateRoutes = () => {
   }
 
   const parseJwt = (token) => {
+    // debugger
     
     try {
       return JSON.parse(atob(token.split('.')[1]));
@@ -42,6 +45,7 @@ const PrivateRoutes = () => {
   // 
 
   const validateToken = (token) => {
+    // debugger
     
     const decodeToken = parseJwt(token);
     if (decodeToken) {
@@ -65,24 +69,28 @@ const PrivateRoutes = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('access');
-  //   const isValidToken = validateToken(token);
+  useEffect(() => {
+    const token = localStorage.getItem('access');
+    const isValidToken = validateToken(token);
 
-  //   if (isValidToken) {
-  //     console.log('Token is valid');
-  //   } else {
-  //     console.log('Token is invalid or has expired');
+    if (isValidToken) {
+      console.log('Token is valid');
+    } else {
+      console.log('Token is invalid or has expired');
       
-  //   }
+    }
    
-  // }, []);
+  }, []);
   // navigate('/login')
   
 
   const auth = {
-    gettokenaccess: gettokenaccess(), // Call the function to get the value
+    gettokenaccess: gettokenaccess(),
+     
+  
   };
+
+  
 
   return auth.gettokenaccess ? <Outlet /> : <Navigate to="/login" />  ;
 

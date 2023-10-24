@@ -22,7 +22,7 @@ const Nav= () => {
 
   const removtoken =()=>{
     // debugger
-    localStorage.clear()
+    localStorage.getItem("access",null )
     navigate("/login")
   } 
 
