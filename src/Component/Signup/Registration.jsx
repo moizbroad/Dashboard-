@@ -32,10 +32,10 @@ const signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!signup.email || !signup.first_name || !signup.last_name || !signup.company_name || !signup.password) {
-      toast.error('Please fill in all required fields.');
-      return;
-    }
+    // if (!signup.email || !signup.first_name || !signup.last_name || !signup.company_name || !signup.password) {
+    //   toast.error('Please fill in all required fields.');
+    //   return;
+    // } 
 
     let data = {
       first_name: signup.first_name,
@@ -158,7 +158,7 @@ const signup = () => {
             </div>
 
             <div className="mt-6">
-              <form action="#" className="space-y-6" onSubmit={handleSubmit}>
+              <form  className="space-y-6" onSubmit={handleSubmit}>
                 <div>
 
                   <div className="mt-1">
@@ -169,7 +169,7 @@ const signup = () => {
                       name="email"
                       type="email"
                       autoComplete="email"
-                      required  
+                      required
                       value={signup.email}
                       onChange={(value) => {
                         setSignup((prev) => ({
@@ -298,7 +298,6 @@ const signup = () => {
                   <button
                     type="submit"
                     className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    onClick={handleSubmit}
                   >
                     Sign Up
                   </button>

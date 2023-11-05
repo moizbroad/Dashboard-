@@ -12,16 +12,19 @@ const PrivateRoutes = () => {
   //   refresh:""
   // })
   const RefreshToken = async () => {
+    
     let data = {
-      refresh: getrefreshtoken()
+      refresh: getrefreshtoken(),
+      
     }
-    // console.log(data, "kkkk")
+    
     axios.post("https://test-backend.budgetlab.io/accounts/token/refresh/", data).then((res) => {
       if (res.status === 200) {
 
         localStorage.setItem('access', res.data.access);
 
         // console.log(access, "aaa")
+        return true
 
       }
 
@@ -29,13 +32,16 @@ const PrivateRoutes = () => {
 
       .catch((err) => {
         console.log(err, "error");
+        return false
         // toast.error(err.response.data.detail)
       });
   }
 
+  
+  
   const parseJwt = (token) => {
+   
     // debugger
-    
     try {
       return JSON.parse(atob(token.split('.')[1]));
     } catch (e) {
@@ -46,30 +52,31 @@ const PrivateRoutes = () => {
 
   const validateToken = (token) => {
     // debugger
-    
+    let rememberME = localStorage.getItem('rememberMe')
     const decodeToken = parseJwt(token);
     if (decodeToken) {
       let date = new Date(decodeToken.exp * 1000);
-      if (date < new Date()) {
-        let rememberME = localStorage.getItem('rememberMe')
-        if (rememberME === true) {
-          RefreshToken()
+      if (date < new Date() && rememberME === true) {
+        RefreshToken()
+        return true 
+      }
+        
+         else {
+          
+          // localStorage.removeItem('access'); // Changed 'setItem' to 'removeItem' to clear the access token
           // navigate('/')
-        } else {
-          localStorage.removeItem('access'); // Changed 'setItem' to 'removeItem' to clear the access token
-          navigate('/login')
+          return false
           // Route to Login
 
         }
       }
 
     }
-    else {
-      return false;
-    }
-  };
+   
+  
 
   useEffect(() => {
+  //  debugger
     const token = localStorage.getItem('access');
     const isValidToken = validateToken(token);
 
@@ -82,6 +89,8 @@ const PrivateRoutes = () => {
    
   }, []);
   // navigate('/login')
+
+  // generate refrs
   
 
   const auth = {
@@ -90,9 +99,13 @@ const PrivateRoutes = () => {
   
   };
 
-  
+  //  if(!gettokenaccess)
+  //  {
+  //   navigate ('/login');  
+  //  }
 
   return auth.gettokenaccess ? <Outlet /> : <Navigate to="/login" />  ;
+
 
 
 };

@@ -1,9 +1,40 @@
 import React from 'react'
 import InputField from './CustomComponent/InputField'
+import { useState } from 'react'
 import { Navigate } from 'react-router'
+import toast  from 'react-hot-toast'; 
+import axios from 'axios';
 
 
 const ResettPassword = () => {
+  const [password, setPassword] = useState({
+    
+    oldpassword:'',
+    newpassword:''
+  })
+  console.log(password, "aaa");
+
+  const ResetPassword = async () => {
+    let data = {
+      old_password: password.oldpassword,
+      new_password: password. newpassword,
+      
+    }
+    // console.log(data, "kkkk")
+    axios.put("https://test-backend.budgetlab.io/accounts/change/password/", data).then((res) => {
+      if (res.status === 200) {
+          toast.success("password changed Sucessfully")
+      }
+    
+    })  
+    
+    .catch((err) => {
+      console.log(err, "error");
+      toast.error(err.response.data.detail)
+    });
+    
+  }
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -30,19 +61,19 @@ const ResettPassword = () => {
           <div className="space-y-1">
             <div className="mt-1">
               <InputField
-              placeholder=" Password"
-                label="Password"
+              placeholder=" old Password"
+                label="old Password"
                 id="password"
-                name="password"
+                name="old Password"
                 type="password"
                 autoComplete="current-password"
                 required
-              // value={signup.password}
-              // onChange={(value) => {
-              //   setSignup((prev) => ({
-              //     ...prev, password: value.target.value
-              //   }))
-              // }}
+              value={password.oldpassword}
+              onChange={(value) => {
+                setPassword((prev) => ({
+                  ...prev, oldpassword: value.target.value
+                }))
+              }}
 
               />
             </div>
@@ -53,19 +84,19 @@ const ResettPassword = () => {
           <div className="space-y-1">
             <div className="mt-1">
               <InputField
-               placeholder="Confirm Password"
-                label="Confirm password"
+               placeholder="New password"
+                label="New password"
                 id="password"
-                name="confirm password"
+                name="New password"
                 type="password"
                 autoComplete="current-password"
                 required
-              // value={signup.password}
-              // onChange={(value) => {
-              //   setSignup((prev) => ({
-              //     ...prev, password: value.target.value
-              //   }))
-              // }}
+              value={password.newpassword}
+              onChange={(value) => {
+                setPassword((prev) => ({
+                  ...prev, newpassword: value.target.value
+                }))
+              }}
 
               />
             </div>
@@ -74,7 +105,7 @@ const ResettPassword = () => {
           <div className='mt-4'>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
+             onClick={ResetPassword}>
               Confirm 
             </button>
           </div>

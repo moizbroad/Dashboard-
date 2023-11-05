@@ -38,8 +38,10 @@ const loogin = () => {
     // console.log(data, "kkkk")
     axios.post("https://test-backend.budgetlab.io/accounts/login/", data).then((res) => {
       if (res.status === 200) {
+        // debugger 
         localStorage.setItem('access', res.data.access);  
         localStorage.setItem('Refreshtoken', res.data.refresh); 
+        localStorage.setItem('access', res.data.access);
         // Storing the rememberMe flag in localStorage
          localStorage.setItem('rememberMe', res.data.remember_me); 
         
@@ -50,6 +52,10 @@ const loogin = () => {
         navigate('/')
         // Route to Dashboard
       }
+      // else {
+      //   navigate('/login')
+      // }
+
     })
     
     .catch((err) => {

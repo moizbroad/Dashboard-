@@ -1,11 +1,13 @@
 import React from 'react'
 
+
+
 const Clickme = () => {
   return (
     <>
-    <div>Clickme</div>
-    <div>Clickme</div>
-    <div>Clickme</div>
+    {/* <Nav/> */}
+    <h1> gsdvvvjmsbv</h1>
+    
     </>
   )
 }

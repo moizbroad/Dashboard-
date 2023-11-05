@@ -31,6 +31,7 @@ const InputField = (props) => {
     noBoxShadow,
   } = props;
 
+  console.log(required, "required")
   const [hidePassword, setHidePassword] = useState(true);
 
   const togglePasswordVisibility = () => {
@@ -65,7 +66,7 @@ const InputField = (props) => {
           defaultValue={defaultValue}
           onChange={onChange}
           autoComplete={autoComplete}
-          required={required ? true : false}
+          required={required}
           type={type === 'password' ? (hidePassword ? 'password' : 'text') : type}
         />
          {type === 'password' && (
