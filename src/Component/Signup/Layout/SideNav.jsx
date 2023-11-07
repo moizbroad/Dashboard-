@@ -18,7 +18,7 @@ function SideNav() {
      
       
 
-    <div class="hidden md:fixed md:top-36 md:bottom-0 md:flex md:w-64 md:flex-col bg-gray-300">
+    <div class="hidden md:fixed md:top-36 md:bottom-0 md:flex md:w-64 md:flex-col bg-gray-800 pl-3">
       {/* Sidebar Header */}
      <div  className="sideNavMain">
 
@@ -30,14 +30,14 @@ function SideNav() {
       
       {/* Sidebar Links */}
      
-        <ul>
+        <ul className='text-white'>
           <li style={{ marginBottom: '20px' }}>
             <NavLink
               className={(isActive) =>
-                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y-" : "text-yellow-400"}hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y" : "text-yellow-400"}text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md lg:border-0 lg:p-0  h-7`
               }
             >
-              <div className='flex   items-center space-x-2'>   
+              <div className='flex   items-center space-x-2'>     
                 <div><FiSettings /></div>
                 <div >General</div>
               </div>
@@ -48,8 +48,7 @@ function SideNav() {
             <NavLink
               to="/userRegistration"
               className={(isActive) =>
-                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y-" : "text-yellow-400"
-                }hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                `block py-2 pr-4 pl-3 duration-100 border-b border-gray-100  ${isActive ? "text-green-400y" : "text-yellow-400"}text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md lg:border-0 lg:p-0  h-7`
               }
             >
               
@@ -63,8 +62,7 @@ function SideNav() {
           <li style={{ marginBottom: '20px' }}>
             <NavLink
               className={(isActive) =>
-                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y-" : "text-yellow-400"
-                }hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y" : "text-yellow-400"}text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md lg:border-0 lg:p-0  h-7`
               }
             >
               
@@ -79,8 +77,7 @@ function SideNav() {
           <li style={{ marginBottom: '20px' }}>
             <NavLink
               className={(isActive) =>
-                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y-" : "text-yellow-400"
-                }hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y" : "text-yellow-400"}text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md lg:border-0 lg:p-0  h-7`
               }
             >
               
@@ -97,8 +94,7 @@ function SideNav() {
           <li style={{ marginBottom: '20px' }}>
             <NavLink
               className={(isActive) =>
-                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y-" : "text-yellow-400"
-                }hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y" : "text-yellow-400"}text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md lg:border-0 lg:p-0  h-7`
               }
             >
               
@@ -113,8 +109,7 @@ function SideNav() {
           <li style={{ marginBottom: '20px' }}>
             <NavLink
               className={(isActive) =>
-                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y-" : "text-yellow-400"
-                }hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y" : "text-yellow-400"}text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md lg:border-0 lg:p-0  h-7`
               }
             >
               
@@ -128,8 +123,7 @@ function SideNav() {
           <li style={{ marginBottom: '20px' }}>
             <NavLink
               className={(isActive) =>
-                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y-" : "text-yellow-400"
-                }hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y" : "text-yellow-400"}text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md lg:border-0 lg:p-0  h-7`
               }
             >
               
@@ -145,8 +139,7 @@ function SideNav() {
           <li style={{ marginBottom: '20px' }}>
             <NavLink
               className={(isActive) =>
-                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y-" : "text-yellow-400"
-                }hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y" : "text-yellow-400"}text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md lg:border-0 lg:p-0  h-7`
               }
             >
               
@@ -162,8 +155,7 @@ function SideNav() {
           <li style={{ marginBottom: '20px' }}>
             <NavLink
               className={(isActive) =>
-                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y-" : "text-yellow-400"
-                }hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y" : "text-yellow-400"}text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md lg:border-0 lg:p-0  h-7`
               }
             >
               
@@ -178,8 +170,7 @@ function SideNav() {
           <li style={{ marginBottom: '20px' }}>
             <NavLink
               className={(isActive) =>
-                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y-" : "text-yellow-400"
-                }hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                `block py-2 pr-4 pl-3 duration-200 border-b border-gray-100  ${isActive ? "text-green-400y" : "text-yellow-400"}text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white rounded-md lg:border-0 lg:p-0  h-7`
               }
             >
              
