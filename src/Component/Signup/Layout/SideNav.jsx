@@ -6,7 +6,7 @@ import { GrDocument } from "react-icons/gr";  //General ledger
 import { BsDatabaseGear } from "react-icons/bs";  //data base  
 import { IoKeyOutline } from "react-icons/io5";  //integration 
 import { GoLock } from "react-icons/go";  //Change password 
-import { TfiWorld } from "react-icons/Tfi";  //Change password 
+// import { TfiWorld } from "react-icons/Tfi";  //Change password 
 import { TbWorld } from "react-icons/Tb";  //Change password 
 import { HiOutlineDocument} from "react-icons/hi2";  //Change password 
 
