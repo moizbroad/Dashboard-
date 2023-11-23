@@ -204,6 +204,7 @@ const UserRegister = () => {
     const [showModal, setShowModal] = useState(false);
     //   const [showBudgets, setShowBudgets] = useState(false);
     const [showIcon, setShowIcon] = useState(null);
+    const [openDiv, setOpenDiv] = useState(false);
     const [currentModal, setCurrentModal] = useState({
         value: "",
         modal: false
@@ -229,6 +230,10 @@ const UserRegister = () => {
         handleTab('user')
     }, [])
 
+
+    const openFunnelDiv = () => {
+        setOpenDiv(!openDiv)
+    }
     const renderTableData = (userdata) => {
         return userdata.map((item, index) => (
             <tr key={index} className='h-20 divide-y divide-gray-200 border'>
@@ -317,71 +322,137 @@ const UserRegister = () => {
     return (
 
         <>
-            <div className=' w-full h-auto'>
-                <div className=' shadow-xl  ml-[300px] mr-32  mt-48 h-[250px] gap-y-10 w-[1000px]'>
-                    <div className=' space-x-10 w-64 items-center  ' >
-                        <nav className='-mp-px flex  space-x-16  mt-8 mb-[13px] pl-2  cursor-pointer ' >
-                            <span onClick={() => handleTab('user')} className=' hover:font-bold'> Users</span>
-                            <span onClick={() => handleTab('Groups')} className=' hover:font-bold'>Groups</span>
-                            <span onClick={() => handleTab('Roles')} className=' hover:font-bold'> Roles</span>
+            <div className=' flex justify-center w-full h-auto absolute'>
+            <div className=' shadow-xl   h-[300px] gap-y-10 w-[1300px] rounded-md relative top-10 left-[130px]'>
+                <div className=' space-x-10 w-64 items-center  ' >
+                    <nav className='-mp-px flex  space-x-16  mt-8 mb-[13px] pl-2 cursor-pointer ' >
+                        <span onClick={() => handleTab('user')} className={`hover:font-bold ${tabState === 'user' ? 'underline' : ''}`} > Users</span>
+                        <span onClick={() => handleTab('Groups')} className={`hover:font-bold ${tabState === 'Groups' ? 'underline' : ''}`} >Groups</span>
+                        <span onClick={() => handleTab('Roles')} className={`hover:font-bold ${tabState === 'Roles' ? 'underline' : ''}`} > Roles</span>
 
 
-                            <div className='flex   justify-end  space-x-4 pl-[580px]' >
-                                <  BsPlusCircle className='h-5 w-5' onClick={() => handleOpenModal(tabState)} />
-                                <HiOutlineFunnel className='h-5 w-6' />
+                        <div className='flex   justify-end items-end  space-x-4 pl-[874px] ' >
+
+                            <div>  <  BsPlusCircle className='h-5 w-5' onClick={() => handleOpenModal(tabState)} /> </div>
+                            <div> <HiOutlineFunnel className='h-5 w-6' onClick={openFunnelDiv}  />
                                 <Modal showModal={showModal} closeModal={closeModal} />
                             </div>
-                        </nav>
+                        </div>
+                    </nav>
 
-                    </div>
-                    <hr />
+                </div>
+                <hr />
 
 
-                    <div className=' flex items-center rounded-lg mt-11 px-5   '>
-                        {/* {user && <table></table>} */}
-                        <table className='min-w-full border-gray-200 border-2 rounded-lg'>
-                            <thead className='bg-gray-50  rounded-lg text-left px-4 h-12  '>
-                                <tr >
-                                    {userdata.length > 0 ? (
-                                        userdata.map((item, index) => (
-                                            <React.Fragment key={index}>
-                                                {item.heading.map((subItem, subIndex) => (
-                                                    <th key={subIndex}>{subItem}</th>
-                                                ))}
-                                            </React.Fragment>
-                                        ))
-                                    ) : null}
+                <div className=' flex items-center rounded-md mt-11 px-5   '>
+                    {/* {user && <table></table>} */}
+                    <table className='min-w-full border-gray-200 border-2 rounded-md'>
+                        <thead className='bg-gray-50  rounded-lg text-left px-4 h-12  '>
+                            <tr >
+                                {userdata.length > 0 ? (
+                                    userdata.map((item, index) => (
+                                        <React.Fragment key={index}>
+                                            {item.heading.map((subItem, subIndex) => (
+                                                <th key={subIndex}>{subItem}</th>
+                                            ))}
+                                        </React.Fragment>
+                                    ))
+                                ) : null}
 
-                                </tr>
-                            </thead>
-                            <tbody className='bg-white items-center w-100'>
-                                <tr className='h-20 divide-y divide-gray-200 border'>
-                                    {/* <td>fds</td> */}
-                                    <td className=' py-3 text-xs font-medium text-slate-950  tracking-wider text-left'>
-                                        awanusman493@gmail.com
-                                    </td>
-                                    <td className=' py-3 text-xs font-medium text-gray-500  tracking-wider text-left'>
-                                        Management
-                                    </td>
-                                    <td className=' py-3 text-left text-xs font-medium text-gray-500  tracking-wider'>
-                                        Admin
-                                    </td>
-                                    <td className=' py-3 text-left text-xs font-medium text-gray-500 '>
-                                        active
-                                    </td>
-                                    <td className=' py-3 text-center font-medium text-gray-500 '>
-                                        <div className='flex space-x-2'>
-                                            <AiFillDelete className='h-5 w-5' />
-                                            <HiPencilSquare className='h-5 w-5' />
+                            </tr>
+                        </thead>
+                        <tbody className='bg-white items-center w-100'>
+                            <tr className='h-20 divide-y divide-gray-200 border '>
+                                {/* <td>fds</td> */}
+                                <td className=' py-3 text-xs font-medium text-slate-950  tracking-wider text-left'>
+                                    awanusman493@gmail.com
+                                </td>
+                                <td className=' py-3 text-xs font-medium text-gray-500  tracking-wider text-left'>
+                                    Management
+                                </td>
+                                <td className=' py-3 text-left text-xs font-medium text-gray-500  tracking-wider'>
+                                    Admin
+                                </td>
+                                <td className=' py-3 text-left text-xs font-medium text-gray-500 '>
+                                    active
+                                </td>
+                                <td className=' py-3 text-center font-medium text-gray-500 '>
+                                    <div className='flex space-x-2'>
+                                        <AiFillDelete className='h-5 w-5' />
+                                        <HiPencilSquare className='h-5 w-5' onClick={() => handleOpenModal(tabState)} />
 
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
+
+
+
+
+        {/* ************************************ Funel Div ********************************* */}
+
+        {openDiv && (<div class="relative  z-10 bg-white border rounded-bl-lg rounded-br-lg border-gray-200 shadow-sm   mt-[110px]  w-[1300px] h-64 left-[280px] top-[110px]  "  >
+            <div className=''>
+
+                <div className='flex space-x-[72px]'>
+                    <div className=' space-y-3 mt-5'>
+                        <div> <span className='text-sm font-bold'> Name</span></div>
+                        <div>
+                            <input type="text" placeholder='Search...' className="rounded appearance-none placeholder-gray-400 focus:outline-none border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" >
+                            </input>
+                        </div>
+
+
+                    </div>
+
+
+                    <div className=' space-y-3 mt-5'>
+                        <div> <span className='text-sm font-bold'> Email</span></div>
+                        <div>
+                            <input type="text" placeholder='Search...' className="rounded appearance-none placeholder-gray-400 focus:outline-none border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" >
+                            </input>
+                        </div>
+
+
+                    </div>
+
+                    <div className=' space-y-3 mt-5'>
+                        <div> <span className='text-sm font-bold'> Groups</span></div>
+                        <div>
+                            <input type="text" placeholder='Search...' className="rounded appearance-none placeholder-gray-400 focus:outline-none border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" >
+                            </input>
+                        </div>
+
+
+                    </div>
+
+                    <div className=' space-y-3 mt-5'>
+                        <div> <span className='text-sm font-bold'> Roles</span></div>
+                        <div>
+                            <input type="text" placeholder='Search...' className="rounded appearance-none placeholder-gray-400 focus:outline-none border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" >
+                            </input>
+                        </div>
+                        <div>
+                            {/* <input type="check" id="checkbox">    </input> */}
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>)}
+
+
+
 
 
             {currentModal.modal === true && <div className="fixed top-12 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
