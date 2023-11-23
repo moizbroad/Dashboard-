@@ -6,7 +6,7 @@ import { AiFillDelete } from 'react-icons/ai'
 import { RiImageAddFill } from 'react-icons/ri'
 import InputField from '../Signup/CustomComponent/InputField'
 import Button from '../Signup/CustomComponent/Button'
-import { TbRubberStamp } from 'react-icons/Tb';
+// import { TbRubberStamp } from 'react-icons/Tb';
 import { BiMinus } from 'react-icons/bi';
 
 
