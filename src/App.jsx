@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom'; // Updated import statement
-import SignUp from './Pages/Signup';
+import SignUp from './Pages/SignUp';
 import LogIn from './Pages/LogIn';
 // import Main from './Pages/Main';
 import gettokenaccess from './Helper/gettokenaccess';
