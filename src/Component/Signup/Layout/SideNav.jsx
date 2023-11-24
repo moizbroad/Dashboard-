@@ -176,7 +176,7 @@ function SideNav() {
              
 
               <div className='flex   items-center space-x-2'>   
-                <div><TbWorld /></div>
+                {/* <div><TbWorld /></div> */}
                 <div >Support </div>
               </div>
             </NavLink>
