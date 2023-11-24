@@ -8,10 +8,12 @@ import InputField from '../Signup/CustomComponent/InputField'
 import Button from '../Signup/CustomComponent/Button'
 // import { TbRubberStamp } from 'react-icons/Tb';
 import { BiMinus } from 'react-icons/bi';
+import { TiDeleteOutline } from "react-icons/ti";
 
 
 const Modal = ({ showModal, closeModal }) => {
-    if (!showModal) return null;
+    if (!showModal) 
+    return null;
 
     return (
         <>
@@ -199,6 +201,9 @@ const OpenFirstRow = () => {
 
 const UserRegister = () => {
 
+        // for delted modal 
+        const [isModalOpen, setIsModalOpen] = useState(false);
+
     const [tabState, setTabState] = useState('user')
     const [userdata, SetuserData] = useState([])
     const [showModal, setShowModal] = useState(false);
@@ -208,11 +213,17 @@ const UserRegister = () => {
     const [currentModal, setCurrentModal] = useState({
         value: "",
         modal: false
-    }
-    )
+    } )
+
+    
     const openModal = () => {
         setShowModal(true);
     };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
 
     const iconChange = (index) => {
         console.log(index)
@@ -220,9 +231,18 @@ const UserRegister = () => {
         // setShowIcon(index)
     }
 
-    const closeModal = () => {
-        setShowModal(false);
-    };
+    // for deleted modal 
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
+      };
+      const handleButtonClick = () => {
+        // Logic for button click
+        console.log('Button clicked');
+        // You can add your specific logic here
+        toggleModal(); // Toggle the modal state to close it
+      };
+
+   
 
     useEffect(() => {
     }, [userdata])
@@ -378,7 +398,7 @@ const UserRegister = () => {
                                 </td>
                                 <td className=' py-3 text-center font-medium text-gray-500 '>
                                     <div className='flex space-x-2'>
-                                        <AiFillDelete className='h-5 w-5' />
+                                        <AiFillDelete className='h-5 w-5'  onClick={toggleModal} />
                                         <HiPencilSquare className='h-5 w-5' onClick={() => handleOpenModal(tabState)} />
 
                                     </div>
@@ -452,6 +472,26 @@ const UserRegister = () => {
         </div>)}
 
 
+{/* **********************************************  Deleted Modla ************************************************ */}
+
+
+{isModalOpen && (
+        <div className=" fixed top-14 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-8 rounded-lg w-[35rem]">
+            {/* Modal content goes here */}
+            <div className='flex items-center space-x-3'>  <TiDeleteOutline className='w-8 h-8 bg-red-400  rounded-full' /> 
+            <span className='text-lg font-medium '> Deleted User </span>
+            </div>
+            <p className='mt-2 ml-1'>Are you sure you want to delete this group? This action cannot be undone.</p>
+           
+            <div className='flex space-x-2 justify-end'>
+            <Button onClick={handleButtonClick}>Cancel </Button>
+            <Button onClick={toggleModal} className='bg-red-500'> Deleted </Button>
+           
+            </div>
+          </div>
+        </div>
+      )} 
 
 
 
