@@ -364,10 +364,10 @@ const UserRegister = () => {
                 <hr />
 
 
-                <div className=' flex items-center rounded-md mt-11 px-5   '>
+                <div className=' flex items-center  mt-11 px-5 '>
                     {/* {user && <table></table>} */}
-                    <table className='min-w-full border-gray-200 border-2 rounded-md'>
-                        <thead className='bg-gray-50  rounded-lg text-left px-4 h-12  '>
+                    <table className='min-w-full border-gray-200 border-2 rounded-lg '>
+                        <thead className='bg-[#F9FAFB] text-[#6b7280]  rounded-md text-left px-4 h-12 text-sm font-serif  '>
                             <tr >
                                 {userdata.length > 0 ? (
                                     userdata.map((item, index) => (
@@ -378,25 +378,27 @@ const UserRegister = () => {
                                         </React.Fragment>
                                     ))
                                 ) : null}
-
+  
                             </tr>
                         </thead>
                         <tbody className='bg-white items-center w-100'>
                             <tr className='h-20 divide-y divide-gray-200 border '>
+
                                 {/* <td>fds</td> */}
-                                <td className=' py-3 text-xs font-medium text-slate-950  tracking-wider text-left'>
-                                    awanusman493@gmail.com
+                                
+                                <td className=' py-3 text-xs font-medium pl-2 text-[#6b7280] text-left'>
+                                    moizbroadthinker543@gmail.com
                                 </td>
-                                <td className=' py-3 text-xs font-medium text-gray-500  tracking-wider text-left'>
+                                <td className=' py-3 text-xs font-medium text-[#6b7280]  tracking-wider text-left'>
                                     Management
                                 </td>
-                                <td className=' py-3 text-left text-xs font-medium text-gray-500  tracking-wider'>
+                                <td className=' py-3 text-left text-xs font-medium text-[#6b7280]  tracking-wider'>
                                     Admin
                                 </td>
-                                <td className=' py-3 text-left text-xs font-medium text-gray-500 '>
+                                <td className=' py-3 text-left text-xs font-medium text-gray-500  '>
                                     active
                                 </td>
-                                <td className=' py-3 text-center font-medium text-gray-500 '>
+                                <td className=' py-3 text-center font-medium text-[#6b7280] '>
                                     <div className='flex space-x-2'>
                                         <AiFillDelete className='h-5 w-5'  onClick={toggleModal} />
                                         <HiPencilSquare className='h-5 w-5' onClick={() => handleOpenModal(tabState)} />
