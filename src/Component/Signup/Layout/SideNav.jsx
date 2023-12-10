@@ -7,8 +7,12 @@ import { BsDatabaseGear } from "react-icons/bs";  //data base
 import { IoKeyOutline } from "react-icons/io5";  //integration 
 import { GoLock } from "react-icons/go";  //Change password 
 import { HiOutlineDocument } from "react-icons/hi2";  //Change password 
+import Userapis from '../../UserRigester/Userapis';
 
 function SideNav() {
+  const { fetchData, users, groups, allRoles, languages, allUsers, usersCount } = Userapis( );
+  
+
   return (
 
     <>
